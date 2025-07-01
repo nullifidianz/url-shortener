@@ -19,22 +19,22 @@ public class UrlController {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestBody UrlRequest req) {
+    @PostMapping("/create")
+    public ResponseEntity<?> createUrl(@RequestBody UrlRequest req) {
         if (req.url() == null || req.url().isBlank())
             return ResponseEntity.badRequest().body("Invalid URL");
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(req));
     }
 
     @GetMapping("/{code}")
-    public ResponseEntity<?> get(@PathVariable String code) {
+    public ResponseEntity<?> getUrl(@PathVariable String code) {
         Optional<UrlResponse> res = service.get(code);
         return res.<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found"));
     }
 
     @PutMapping("/{code}")
-    public ResponseEntity<?> update(@PathVariable String code, @RequestBody UrlRequest req) {
+    public ResponseEntity<?> updateUrl(@PathVariable String code, @RequestBody UrlRequest req) {
         if (req.url() == null || req.url().isBlank())
             return ResponseEntity.badRequest().body("Invalid URL");
         Optional<UrlResponse> res = service.update(code, req);
@@ -43,14 +43,14 @@ public class UrlController {
     }
 
     @DeleteMapping("/{code}")
-    public ResponseEntity<Void> delete(@PathVariable String code) {
+    public ResponseEntity<Void> deleteUrl(@PathVariable String code) {
         return service.delete(code)
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping("/{code}/stats")
-    public ResponseEntity<?> stats(@PathVariable String code) {
+    public ResponseEntity<?> urlStats(@PathVariable String code) {
         Optional<UrlResponse> res = service.stats(code);
         return res.<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found"));
