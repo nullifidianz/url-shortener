@@ -1,4 +1,4 @@
-package entity;
+package com.nullifidianz.urlShortener.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

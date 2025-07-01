@@ -1,4 +1,4 @@
-package com.nullifidianz.urlShortener;
+package com.nullifidianz.urlShortener.dto;
 
-public record UrlRequest() {
+public record UrlRequest(String url) {
 }
