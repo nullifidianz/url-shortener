@@ -1,9 +1,10 @@
 # Encurtador de URL
 
-> [Leia este README em inglês](README_en.md)
+> [Read this README in English!](README_en.md)
 
 ## Descrição
 Este projeto é um serviço de encurtamento de URLs desenvolvido em Java utilizando Spring Boot. Ele permite criar URLs curtas que redirecionam para endereços longos, além de fornecer estatísticas de acesso e gerenciamento das URLs encurtadas.
+baseado no https://roadmap.sh/projects/url-shortening-service
 
 ## Funcionalidades
 - Criar uma URL curta a partir de uma URL longa
