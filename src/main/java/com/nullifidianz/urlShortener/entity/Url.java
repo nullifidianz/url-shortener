@@ -3,30 +3,31 @@ package entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.time.Instant;
+
+
 
 @Entity
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
+
+@Builder
 public class Url {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Long id;
     @Column(nullable = false)
     private String url;
     @Column(unique = true)
     private String shortCode;
 
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime expiresAt;
+    private Instant createdAt;
+    private Instant updatedAt;
 
 
-    private int acessCount;
+
+    private Long accessCount;
 }
