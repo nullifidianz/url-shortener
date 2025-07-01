@@ -11,7 +11,6 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.Random;
 
-
 @Service
 public class UrlService {
 
@@ -27,7 +26,8 @@ public class UrlService {
         StringBuilder sb;
         do {
             sb = new StringBuilder();
-            for (int i = 0; i < 6; i++) sb.append(chars.charAt(random.nextInt(chars.length())));
+            for (int i = 0; i < 6; i++)
+                sb.append(chars.charAt(random.nextInt(chars.length())));
         } while (repository.findByShortCode(sb.toString()).isPresent());
         return sb.toString();
     }
@@ -78,7 +78,15 @@ public class UrlService {
                 u.getShortCode(),
                 u.getCreatedAt(),
                 u.getUpdatedAt(),
-                u.getAccessCount()
-        );
+                u.getAccessCount());
     }
+
+    public Optional<UrlResponse> redirect(String code) {
+        return repository.findByShortCode(code).map(url -> {
+            url.setAccessCount(url.getAccessCount() + 1);
+            repository.save(url);
+            return map(url);
+        });
+    }
+
 }

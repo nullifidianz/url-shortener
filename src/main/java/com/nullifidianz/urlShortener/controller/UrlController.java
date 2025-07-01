@@ -55,4 +55,11 @@ public class UrlController {
         return res.<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found"));
     }
+
+    @GetMapping("/{code}/redirect")
+    public ResponseEntity<?> redirect(@PathVariable String code) {
+        Optional<UrlResponse> res = service.redirect(code);
+        return res.<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found"));
+    }
 }
